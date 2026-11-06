@@ -17,11 +17,10 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/categories", require("./routes/categories"));
 app.use("/api/suppliers", require("./routes/suppliers"));
+app.use("/api/items", require("./routes/items"));
+app.use("/api/stock", require("./routes/stock"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {
   console.log("StockSense API running on http://localhost:" + PORT);
 });
-
-
-
