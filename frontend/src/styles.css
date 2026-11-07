@@ -161,3 +161,40 @@ input:focus, select:focus { outline: 2px solid var(--green); border-color: trans
 .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .card-head .card-title { margin-bottom: 0; }
 .link { color: var(--green); text-decoration: none; font-size: 13px; }
+
+/* items page */
+.toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.toolbar select { width: auto; min-width: 170px; }
+.search-box { position: relative; flex: 1; min-width: 240px; }
+.search-box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.search-box input { padding-left: 38px; }
+.table-scroll { overflow-x: auto; }
+.table th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+.table th.sortable:hover { color: var(--green); }
+.table th svg { vertical-align: middle; margin-left: 4px; }
+.table tbody tr:hover { background: rgba(34, 214, 138, 0.04); }
+.pager { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; gap: 10px; }
+.pager-btns { display: flex; align-items: center; gap: 12px; }
+
+/* modal, form, row buttons */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(2, 8, 12, 0.72); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+.modal { width: 100%; max-width: 560px; padding: 24px; max-height: 92vh; overflow: auto; }
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.form-grid .full { grid-column: 1 / -1; }
+.form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; }
+.btn.accent { background: var(--green); border-color: var(--green); color: #04130c; font-weight: 700; }
+.btn.accent:hover { filter: brightness(1.1); color: #04130c; }
+.row-actions { display: flex; gap: 6px; }
+.row-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 6px; border-radius: 8px; cursor: pointer; display: flex; }
+.row-btn:hover { color: var(--green); border-color: var(--green); }
+.row-btn.danger:hover { color: var(--red); border-color: var(--red); }
+.hint { font-size: 12px; color: var(--muted); margin-top: 12px; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* stock in/out toggle */
+.toggle-row { display: flex; gap: 10px; margin-top: 18px; }
+.toggle { flex: 1; padding: 11px; border: 1px solid var(--border); background: transparent; color: var(--muted); border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 600; font-family: inherit; }
+.toggle:hover { color: var(--text); border-color: var(--muted); }
+.toggle.active-in { border-color: var(--green); color: var(--green); background: rgba(34, 214, 138, 0.12); }
+.toggle.active-out { border-color: var(--red); color: var(--red); background: rgba(255, 93, 108, 0.12); }

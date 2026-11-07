@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Items from "./pages/Items.jsx";
 import Layout from "./components/Layout.jsx";
 import { getToken } from "./api.js";
 
@@ -23,7 +24,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route element={<Protected><Layout /></Protected>}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/items" element={<Soon title="Items" />} />
+        <Route path="/items" element={<Items />} />
         <Route path="/movements" element={<Soon title="Stock Movements" />} />
         <Route path="/categories" element={<Soon title="Categories" />} />
         <Route path="/suppliers" element={<Soon title="Suppliers" />} />
