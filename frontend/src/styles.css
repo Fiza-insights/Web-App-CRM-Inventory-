@@ -393,3 +393,23 @@ html[data-theme="glass"] .login-wrap { background: transparent; }
 
 /* user role badge */
 .badge.role-user { background: rgba(255, 255, 255, 0.08); color: var(--muted); }
+
+/* small screens */
+@media (max-width: 900px) {
+  .app { padding: 10px; }
+  .sidebar { padding: 10px; gap: 4px; }
+  .sidebar .logo { width: 100%; padding-bottom: 6px; }
+  .nav-link { padding: 8px 10px; font-size: 13px; }
+  .nav-link:hover { transform: none; }
+  .topbar { flex-wrap: wrap; gap: 10px; padding: 12px 14px; }
+  .user-name, .user-role { display: none; }
+  .theme-switch { padding: 6px 8px; }
+}
+@media (max-width: 600px) {
+  .page-head, .toolbar { flex-direction: column; align-items: stretch; }
+  .search-box { min-width: 0; }
+  .toolbar select { width: 100%; }
+  .kpi-value { font-size: 22px; }
+  .modal { padding: 18px; }
+  .pager { justify-content: center; }
+}
