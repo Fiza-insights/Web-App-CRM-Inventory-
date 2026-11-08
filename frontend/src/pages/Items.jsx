@@ -22,8 +22,8 @@ export default function Items() {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [status, setStatus] = useState("");
-  const [sort, setSort] = useState("name");
-  const [order, setOrder] = useState("asc");
+  const [sort, setSort] = useState("created_at");
+  const [order, setOrder] = useState("desc");
   const [page, setPage] = useState(1);
   const [refresh, setRefresh] = useState(0);
   const [result, setResult] = useState(null);
@@ -204,4 +204,5 @@ export default function Items() {
     </div>
   );
 }
+
 

@@ -69,10 +69,11 @@ router.get("/movements", function (req, res) {
   const rows = db.prepare(
     "SELECT m.id, m.item_id, i.name AS item_name, i.sku, m.type, m.quantity, m.note, m.created_at, u.name AS user_name " +
     "FROM stock_movements m JOIN items i ON i.id = m.item_id LEFT JOIN users u ON u.id = m.user_id " +
-    whereSql + "ORDER BY m.id DESC LIMIT ? OFFSET ?"
+    whereSql + "ORDER BY m.created_at DESC, m.id DESC LIMIT ? OFFSET ?"
   ).all(...params, limit, (page - 1) * limit);
 
   res.json({ movements: rows, page: page, limit: limit, total: total, total_pages: Math.max(Math.ceil(total / limit), 1) });
 });
 
 module.exports = router;
+

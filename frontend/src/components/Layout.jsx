@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { LayoutDashboard, Package, ArrowLeftRight, Tags, Truck, ScrollText, Bell, Users, LogOut, Boxes } from "lucide-react";
 import { api, getUser, logout } from "../api.js";
+import ThemeSwitch from "./ThemeSwitch.jsx";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, roles: ["admin", "manager", "user"] },
@@ -19,9 +20,24 @@ export default function Layout() {
   const location = useLocation();
   const [unread, setUnread] = useState(0);
 
+  function refreshUnread() {
+    api("/notifications")
+      .then(function (d) { setUnread(d.unread_count); })
+      .catch(function () {});
+  }
+
   useEffect(function () {
-    api("/notifications").then(function (d) { setUnread(d.unread_count); }).catch(function () {});
+    refreshUnread();
   }, [location.pathname]);
+
+  useEffect(function () {
+    window.addEventListener("notifications-changed", refreshUnread);
+    const timer = setInterval(refreshUnread, 30000);
+    return function () {
+      window.removeEventListener("notifications-changed", refreshUnread);
+      clearInterval(timer);
+    };
+  }, []);
 
   const links = NAV.filter(function (n) { return n.roles.indexOf(user.role) !== -1; });
   const current = NAV.find(function (n) { return n.to === location.pathname; });
@@ -43,6 +59,9 @@ export default function Layout() {
             </NavLink>
           );
         })}
+        <button className="nav-link logout-link" onClick={function () { logout(); window.location.href = "/login"; }}>
+          <LogOut size={18} />Logout
+        </button>
         <div className="sidebar-foot">Inventory Management System</div>
       </aside>
 
@@ -50,6 +69,7 @@ export default function Layout() {
         <header className="card topbar">
           <h1>{title}</h1>
           <div className="topbar-right">
+            <ThemeSwitch />
             <NavLink to="/notifications" className="bell" title="Notifications">
               <Bell size={18} />
               {unread > 0 && <span className="dot">{unread}</span>}
@@ -71,3 +91,4 @@ export default function Layout() {
     </div>
   );
 }
+

@@ -21,10 +21,11 @@ router.get("/", function (req, res) {
   const rows = db.prepare(
     "SELECT a.id, a.action, a.entity, a.entity_id, a.details, a.created_at, u.name AS user_name " +
     "FROM activity_log a LEFT JOIN users u ON u.id = a.user_id " +
-    whereSql + "ORDER BY a.id DESC LIMIT ? OFFSET ?"
+    whereSql + "ORDER BY a.created_at DESC, a.id DESC LIMIT ? OFFSET ?"
   ).all(...params, limit, (page - 1) * limit);
 
   res.json({ entries: rows, page: page, limit: limit, total: total, total_pages: Math.max(Math.ceil(total / limit), 1) });
 });
 
 module.exports = router;
+

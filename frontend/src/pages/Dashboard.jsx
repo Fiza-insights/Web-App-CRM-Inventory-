@@ -4,10 +4,10 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tool
 import { Boxes, Wallet, AlertTriangle, PackageX, Bell } from "lucide-react";
 import { api, getUser } from "../api.js";
 
-const COLORS = ["#22d68a", "#19c3b1", "#3ba0ff", "#8b7bff", "#f5b942", "#ff5d6c"];
-const GRID = "#143039";
-const AXIS = "#7d98a1";
-const TOOLTIP = { background: "#0b1a21", border: "1px solid #143039", borderRadius: 8, color: "#e4f1f2" };
+const COLORS = ["var(--green)", "var(--teal)", "var(--blue)", "var(--purple)", "var(--amber)", "var(--red)"];
+const GRID = "var(--border)";
+const AXIS = "var(--muted)";
+const TOOLTIP = { background: "var(--panel)", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text)" };
 
 function money(n) {
   return "Rs " + Number(n || 0).toLocaleString("en-PK");
@@ -58,7 +58,7 @@ export default function Dashboard() {
   const days = last7Days(data.movements_last_7_days);
   const healthy = c.total_items - c.low_stock - c.out_of_stock;
   const pct = c.total_items ? Math.round((healthy / c.total_items) * 100) : 0;
-  const healthColor = pct >= 80 ? "#22d68a" : pct >= 60 ? "#f5b942" : "#ff5d6c";
+  const healthColor = pct >= 80 ? "var(--green)" : pct >= 60 ? "var(--amber)" : "var(--red)";
   const healthLabel = pct >= 80 ? "Healthy" : pct >= 60 ? "Fair" : "Needs attention";
 
   const cards = [
@@ -93,12 +93,12 @@ export default function Dashboard() {
             <AreaChart data={days} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <defs>
                 <linearGradient id="gIn" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#19c3b1" stopOpacity={0.5} />
-                  <stop offset="95%" stopColor="#19c3b1" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--teal)" stopOpacity={0.5} />
+                  <stop offset="95%" stopColor="var(--teal)" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="gOut" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#22d68a" stopOpacity={0.5} />
-                  <stop offset="95%" stopColor="#22d68a" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--green)" stopOpacity={0.5} />
+                  <stop offset="95%" stopColor="var(--green)" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke={GRID} vertical={false} />
@@ -106,8 +106,8 @@ export default function Dashboard() {
               <YAxis stroke={AXIS} tickLine={false} axisLine={false} />
               <Tooltip contentStyle={TOOLTIP} />
               <Legend />
-              <Area type="monotone" dataKey="stock_in" name="Stock in" stroke="#19c3b1" strokeWidth={2} fill="url(#gIn)" />
-              <Area type="monotone" dataKey="stock_out" name="Stock out" stroke="#22d68a" strokeWidth={2} fill="url(#gOut)" />
+              <Area type="monotone" dataKey="stock_in" name="Stock in" stroke="var(--teal)" strokeWidth={2} fill="url(#gIn)" />
+              <Area type="monotone" dataKey="stock_out" name="Stock out" stroke="var(--green)" strokeWidth={2} fill="url(#gOut)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 <PieChart>
                   <Pie data={[{ v: pct }, { v: 100 - pct }]} dataKey="v" startAngle={180} endAngle={0} innerRadius="70%" outerRadius="100%" cy="90%" stroke="none">
                     <Cell fill={healthColor} />
-                    <Cell fill="#143039" />
+                    <Cell fill="var(--border)" />
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
@@ -195,7 +195,7 @@ export default function Dashboard() {
             {alerts.map(function (n) {
               return (
                 <li key={n.id}>
-                  <Bell size={16} color="#f5b942" style={{ marginTop: 2 }} />
+                  <Bell size={16} color="var(--amber)" style={{ marginTop: 2 }} />
                   <span>{n.message}</span>
                 </li>
               );
@@ -214,8 +214,8 @@ export default function Dashboard() {
               <YAxis stroke={AXIS} tickLine={false} axisLine={false} />
               <Tooltip contentStyle={TOOLTIP} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
               <Legend />
-              <Bar dataKey="stock_in" name="Stock in" fill="#19c3b1" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="stock_out" name="Stock out" fill="#22d68a" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="stock_in" name="Stock in" fill="var(--teal)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="stock_out" name="Stock out" fill="var(--green)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -241,3 +241,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

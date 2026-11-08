@@ -24,6 +24,8 @@ app.use("/api/activity", require("./routes/activity"));
 app.use("/api/dashboard", require("./routes/dashboard"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, function () {
+app.listen(PORT, function (err) {
+  if (err) { console.error("Cannot start server: " + err.message); process.exit(1); }
   console.log("StockSense API running on http://localhost:" + PORT);
 });
+
