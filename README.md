@@ -69,7 +69,7 @@ Open http://localhost:5173
 
 ## Database
 
-Tables (see `backend/schema.sql`): users, categories, suppliers, items, stock_movements, activity_log, notifications.
+SQL files: `database/schema.sql` (tables) and `database/seed.sql` (dummy data). Tables: users, categories, suppliers, items, stock_movements, activity_log, notifications.
 
 ## Screenshots
 
@@ -88,3 +88,4 @@ Tables (see `backend/schema.sql`): users, categories, suppliers, items, stock_mo
 ## Development Notes
 
 I built this project with the help of an AI assistant (Claude). I ran and tested every feature myself and I can explain how each part of the code works.
+
