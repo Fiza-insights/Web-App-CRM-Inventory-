@@ -11,3 +11,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </BrowserRouter>
 );
 
+
+document.documentElement.setAttribute("data-theme", "glass");
